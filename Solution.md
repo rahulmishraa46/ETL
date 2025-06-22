@@ -125,7 +125,7 @@ graph TD
 4. **Task Naming** - Descriptive names for monitoring
 5. **Dependency Management** - Implicit through function calls
 
-## 🚀 Execution Instructions
+##  Execution Instructions
 1. Install dependencies:
 ```bash
 pip install pandas numpy duckdb plotly prefect
