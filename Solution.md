@@ -2,14 +2,14 @@
 
 # Supermarket Sales ETL Pipeline solution
 
-## 📦 Required Libraries
+##  Required Libraries
 ```bash
 pip install pandas numpy duckdb plotly prefect --quiet
 ```
 
-## 🚀 Prefect Workflow Implementation
+## Prefect Workflow Implementation
 
-### 1️⃣ Data Extraction (Prefect Task)
+### Data Extraction (Prefect Task)
 ```python
 import pandas as pd
 import numpy as np
@@ -22,11 +22,11 @@ from datetime import datetime
 def extract_data():
     url = "https://raw.githubusercontent.com/sushantag9/Supermarket-Sales-Data-Analysis/master/supermarket_sales%20-%20Sheet1.csv"
     df = pd.read_csv(url)
-    print(f"✅ Extracted {len(df)} records")
+    print(f"Extracted {len(df)} records")
     return df
 ```
 
-### 2️⃣ Data Transformation (Prefect Task)
+###  Data Transformation (Prefect Task)
 ```python
 @task(name="Transform Data")
 def transform_data(df):
@@ -43,11 +43,11 @@ def transform_data(df):
     df['City'] = df['City'].str.title()
     df['Product line'] = df['Product line'].str.title()
     
-    print("🔄 Data transformation complete")
+    print(" Data transformation complete")
     return df
 ```
 
-### 3️⃣ Data Analysis (Prefect Task)
+###  Data Analysis (Prefect Task)
 ```python
 @task(name="Analyze Data")
 def analyze_data(df):
@@ -65,36 +65,9 @@ def analyze_data(df):
     return summary, hourly_sales
 ```
 
-### 4️⃣ Data Visualization (Prefect Task)
-```python
-@task(name="Visualize Data")
-def visualize_data(df, summary, hourly_sales):
-    # Product performance visualization
-    fig1 = px.bar(summary, 
-                 x='Product line', 
-                 y='Total',
-                 title='Total Sales by Product Line',
-                 color='Product line')
-    
-    # Hourly sales pattern visualization
-    fig2 = px.line(hourly_sales,
-                  x='Hour',
-                  y='Total',
-                  title='Hourly Sales Pattern')
-    
-    # Payment method distribution
-    fig3 = px.pie(df,
-                 names='Payment',
-                 title='Payment Method Distribution')
-    
-    # Save visualizations
-    fig1.write_html("product_performance.html")
-    fig2.write_html("hourly_sales.html")
-    fig3.write_html("payment_distribution.html")
-    print("📊 Visualizations saved as HTML files")
-```
 
-### 5️⃣ Data Loading (Prefect Task)
+```
+###  Data Loading (Prefect Task)
 ```python
 @task(name="Load Data")
 def load_data(df):
@@ -107,10 +80,10 @@ def load_data(df):
     
     # Save processed CSV
     df.to_csv('processed_supermarket_sales.csv', index=False)
-    print("💾 Data saved in multiple formats")
+    print(" Data saved in multiple formats")
 ```
 
-### 6️⃣ Orchestration Flow (Prefect Flow)
+### Orchestration Flow (Prefect Flow)
 ```python
 @flow(name="Supermarket Sales ETL")
 def supermarket_etl():
@@ -125,10 +98,10 @@ def supermarket_etl():
     # Data Loading
     load_data(clean_data)
     
-    return "🎉 Pipeline execution complete!"
+    return " Pipeline execution complete!"
 ```
 
-### 7️⃣ Pipeline Execution
+###  Pipeline Execution
 ```python
 if __name__ == "__main__":
     # Run Prefect workflow
@@ -136,7 +109,7 @@ if __name__ == "__main__":
     print(result)
 ```
 
-## 🔄 Prefect Workflow Structure
+## Prefect Workflow Structure
 ```mermaid
 graph TD
     A[Extract Data] --> B[Transform Data]
@@ -146,7 +119,7 @@ graph TD
     C --> D
 ```
 
-## ✅ Prefect Features Used:
+##  Prefect Features Used:
 1. **Task Decorators** - `@task` for each processing step
 2. **Flow Orchestration** - `@flow` for pipeline management
 3. **Automatic Retries** - `retries=2` in extraction task
