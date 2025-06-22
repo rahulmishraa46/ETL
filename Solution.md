@@ -66,7 +66,6 @@ def analyze_data(df):
 ```
 
 
-```
 ###  Data Loading (Prefect Task)
 ```python
 @task(name="Load Data")
@@ -141,7 +140,7 @@ python supermarket_etl.py
 prefect server start
 ```
 
-## 📂 Output Files:
+##  Output Files:
 1. `product_performance.html` - Sales by product line
 2. `hourly_sales.html` - Sales time patterns
 3. `payment_distribution.html` - Payment methods
